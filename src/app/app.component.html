@@ -1,5 +1,18 @@
-<div class="container">
-  <div class="lists"></div>
+<div class="container" cdkDropListGroup>
+  <div class="lists">
+    <div
+      class="card-list card-list-user"
+      cdkDropList
+      [cdkDropListData]="bannedList"
+      (cdkDropListDropped)="dropOnList($event)"
+    >
+      <div class="card-list__item" *ngFor="let card of bannedList" cdkDrag>
+        <img [src]="card.card_images[0].image_url_small" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <!-- <code> </code> -->
   <div class="searcher">
     <mat-form-field class="example-form-field" appearance="outline">
       <mat-label>Clearable input</mat-label>
@@ -9,17 +22,14 @@
       </button>
     </mat-form-field>
 
-    <button (click)="searchCard(cardName.value)">Search</button>
+    <!-- <button (click)="searchCard(cardName.value)">Search</button> -->
+    <button (click)="print()">Search</button>
     <hr />
 
-    <!-- <ul>
-      <li *ngFor="let card of cardResultsList">{{ card.name }}</li>
-    </ul> -->
-
-    <img
-      *ngFor="let card of cardResultsList"
-      [src]="card.card_images[0].image_url_small"
-      alt=""
-    />
+    <div class="card-list" cdkDropList [cdkDropListData]="cardResultsList">
+      <div class="card-list__item" *ngFor="let card of cardResultsList" cdkDrag>
+        <img [src]="card.card_images[0].image_url_small" alt="" />
+      </div>
+    </div>
   </div>
 </div>
