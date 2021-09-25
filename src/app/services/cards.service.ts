@@ -16,6 +16,12 @@ import {
 export class CardsService {
   private _YGO_API = 'https://db.ygoprodeck.com/api/v7/cardinfo.php';
 
+  private STATIC_DOCUMENT_DATA = [
+    { id: 'banned', document: 'Zkcc29YMBbYg2aZGC6Ny' },
+    { id: 'limited', document: 'N8csYtRNb8P3tox0UPy9' },
+    { id: 'semilimited', document: 'QCc86t80a68msCGSCixm' },
+    { id: 'unlimited', document: 'eEXpBtHDSVK6IwH5T3t7' },
+  ];
   constructor(
     private http: HttpClient,
     private firestore: Firestore,
@@ -38,9 +44,18 @@ export class CardsService {
   setList(listName: string, data: Array<any>) {
     // const collect = collection(this.firestore, listName);
     // collectionChanges(collect, data).subscribe(console.log);
+
+    // data.forEach((item) => {
+    //   this._fireStore.collection(listName).add(item);
+    // });
+    const documentData = this.STATIC_DOCUMENT_DATA.find(
+      (item) => item.id === listName
+    );
+    console.log(documentData);
+
     this._fireStore
       .collection(listName)
-      .doc('MaOkl9i6M88DZMnOoJrJ')
+      .doc(documentData?.document || '')
       .update({ data });
   }
 }

@@ -45,11 +45,30 @@ export class AppComponent implements OnInit {
         }
       });
 
-    this.getList().subscribe((res: any) => {
+    this.getList('banned').subscribe((res: any) => {
       // this.bannedList = res;
+      console.log(res);
       this.bannedList = res[0].data;
     });
-    // console.log(ga);
+
+    this.getList('limited').subscribe((res: any) => {
+      // this.bannedList = res;
+      console.log(res);
+      this.limitedList = res[0].data;
+    });
+
+    this.getList('semilimited').subscribe((res: any) => {
+      // this.bannedList = res;
+      console.log(res);
+      this.semiLimitedList = res[0].data;
+    });
+
+    this.getList('unlimited').subscribe((res: any) => {
+      // this.bannedList = res;
+      console.log(res);
+      this.unlimitedList = res[0].data;
+    });
+    // // console.log(ga);
   }
 
   async searchCard(cardName: string) {
@@ -98,12 +117,15 @@ export class AppComponent implements OnInit {
     this.setList();
   }
 
-  getList() {
-    const res = this.cardService.getList('banned');
+  getList(listName: string) {
+    const res = this.cardService.getList(listName);
     return res;
   }
 
   setList() {
     this.cardService.setList('banned', this.bannedList);
+    this.cardService.setList('limited', this.limitedList);
+    this.cardService.setList('semilimited', this.semiLimitedList);
+    this.cardService.setList('unlimited', this.unlimitedList);
   }
 }
