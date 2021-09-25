@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CardsService } from './services/cards.service';
-import { debounce, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import {
+  debounce,
+  debounceTime,
+  distinctUntilChanged,
+  map,
+} from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Card } from './interfaces/card.interface';
@@ -11,6 +16,9 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
+import { Firestore } from '@angular/fire/firestore';
+import { collection } from '@firebase/firestore';
+import { collectionData } from 'rxfire/firestore';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -21,13 +29,13 @@ export class AppComponent implements OnInit {
   cardName = new FormControl('');
 
   bannedList: Card[] = [];
+  limitedList: Card[] = [];
+  semiLimitedList: Card[] = [];
+  unlimitedList: Card[] = [];
   cardResultsList: Card[] = [];
-
-  // cardNameSubscription: Subscription = new Subscription();
-
   constructor(private cardService: CardsService) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.cardName.valueChanges
       .pipe(debounceTime(1000))
       .subscribe(async (cardName) => {
@@ -36,6 +44,12 @@ export class AppComponent implements OnInit {
           console.log(this.cardResultsList);
         }
       });
+
+    this.getList().subscribe((res: any) => {
+      // this.bannedList = res;
+      this.bannedList = res[0].data;
+    });
+    // console.log(ga);
   }
 
   async searchCard(cardName: string) {
@@ -76,6 +90,20 @@ export class AppComponent implements OnInit {
   }
 
   print() {
-    console.log(this.bannedList);
+    console.log('banned', this.bannedList);
+    console.log('limited', this.limitedList);
+    console.log('semilimited', this.semiLimitedList);
+    console.log('unlimited', this.unlimitedList);
+
+    this.setList();
+  }
+
+  getList() {
+    const res = this.cardService.getList('banned');
+    return res;
+  }
+
+  setList() {
+    this.cardService.setList('banned', this.bannedList);
   }
 }

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "banlistcreator": {
+      "hosting": {
+        "banlistCreator": [
+          "banlistcreator"
+        ]
+      }
+    }
+  }
+}
