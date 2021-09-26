@@ -1,0 +1,112 @@
+<div class="container" cdkDropListGroup>
+  <div class="lists">
+    <mat-expansion-panel style="width: 100%">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Baneadas </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div
+        class="card-list card-list-user"
+        cdkDropList
+        [cdkDropListData]="bannedList"
+        (cdkDropListDropped)="dropOnList($event)"
+      >
+        <div
+          class="card-list__item"
+          *ngFor="let card of bannedList"
+          cdkDrag
+          (contextmenu)="deleteCard($event, card, bannedList)"
+        >
+          <img [src]="card.card_images[0].image_url_small" alt="" />
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel style="width: 100%">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Limitadas </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div
+        class="card-list card-list-user"
+        cdkDropList
+        [cdkDropListData]="limitedList"
+        (cdkDropListDropped)="dropOnList($event)"
+      >
+        <div
+          class="card-list__item"
+          *ngFor="let card of limitedList"
+          cdkDrag
+          (contextmenu)="deleteCard($event, card, limitedList)"
+        >
+          <img [src]="card.card_images[0].image_url_small" alt="" />
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel style="width: 100%">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Semi-Limitadas </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div
+        class="card-list card-list-user"
+        cdkDropList
+        [cdkDropListData]="semiLimitedList"
+        (cdkDropListDropped)="dropOnList($event)"
+      >
+        <div
+          class="card-list__item"
+          *ngFor="let card of semiLimitedList"
+          cdkDrag
+          (contextmenu)="deleteCard($event, card, semiLimitedList)"
+        >
+          <img [src]="card.card_images[0].image_url_small" alt="" />
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel style="width: 100%">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Sin límite </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div
+        class="card-list card-list-user"
+        cdkDropList
+        [cdkDropListData]="unlimitedList"
+        (cdkDropListDropped)="dropOnList($event)"
+      >
+        <div
+          class="card-list__item"
+          *ngFor="let card of unlimitedList"
+          cdkDrag
+          (contextmenu)="deleteCard($event, card, unlimitedList)"
+        >
+          <img [src]="card.card_images[0].image_url_small" alt="" />
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </div>
+
+  <!-- <code> </code> -->
+  <div class="searcher">
+    <mat-form-field class="example-form-field" appearance="outline">
+      <mat-label>Clearable input</mat-label>
+      <input matInput type="text" [formControl]="cardName" />
+      <button *ngIf="cardName" matSuffix mat-icon-button aria-label="Clear">
+        <mat-icon (click)="cardName.setValue('')">close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <!-- <button (click)="searchCard(cardName.value)">Search</button> -->
+    <button (click)="saveList()">Search</button>
+    <hr />
+
+    <div class="card-list" cdkDropList [cdkDropListData]="cardResultsList">
+      <div class="card-list__item" *ngFor="let card of cardResultsList" cdkDrag>
+        <img [src]="card.card_images[0].image_url_small" alt="" />
+      </div>
+    </div>
+  </div>
+</div>
