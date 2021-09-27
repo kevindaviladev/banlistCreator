@@ -4,6 +4,8 @@ import { FormControl } from '@angular/forms';
 import { CdkDragDrop, copyArrayItem } from '@angular/cdk/drag-drop';
 import { Card } from 'src/app/interfaces/card.interface';
 import { CardsService } from 'src/app/services/cards.service';
+// import Swal from 'sweetalert2/dist/sweetalert2.js';
+import swal from 'sweetalert2';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -91,19 +93,60 @@ export class AdminComponent implements OnInit {
   }
 
   saveLists() {
-    this.cardService.setList('banned', this.bannedList);
-    this.cardService.setList('limited', this.limitedList);
-    this.cardService.setList('semilimited', this.semiLimitedList);
-    this.cardService.setList('unlimited', this.unlimitedList);
+    swal
+      .fire({
+        title: '¿Guardar los cambios?',
+        text: `Se actualizará la banlist publicada`,
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'No',
+        confirmButtonText: 'Sí',
+        confirmButtonColor: '#1D90CE',
+        cancelButtonColor: '#A01B0A',
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.value) {
+          this.cardService.setList('banned', this.bannedList);
+          this.cardService.setList('limited', this.limitedList);
+          this.cardService.setList('semilimited', this.semiLimitedList);
+          this.cardService.setList('unlimited', this.unlimitedList);
+          swal.fire('¡Banlist actualizada!', '', 'success');
+        }
+      });
+    // this.cardService.setList('banned', this.bannedList);
+    // this.cardService.setList('limited', this.limitedList);
+    // this.cardService.setList('semilimited', this.semiLimitedList);
+    // this.cardService.setList('unlimited', this.unlimitedList);
   }
 
   deleteCard(event: any, card: Card, list: Card[]) {
+    console.log('ga');
+    
     event.preventDefault();
-    const indexCard = list.indexOf(card);
-    if (indexCard !== -1) {
-      list.splice(indexCard, 1);
-    }
-    console.log(list);
-    console.log(card);
+
+    swal
+      .fire({
+        title: '¿Quitar la carta?',
+        text: `${card.name}`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, la odio.',
+        cancelButtonText: 'No :(',
+        confirmButtonColor: '#1D90CE',
+        cancelButtonColor: '#A01B0A',
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.value) {
+          const indexCard = list.indexOf(card);
+          if (indexCard !== -1) {
+            list.splice(indexCard, 1);
+          }
+          console.log(list);
+          console.log(card);
+          swal.fire('Removida!', 'Product removed successfully.', 'success');
+        }
+      });
   }
 }

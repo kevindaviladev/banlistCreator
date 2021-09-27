@@ -1,1 +1,49 @@
-<p>banlist works!</p>
+<div class="lists">
+  <mat-expansion-panel style="width: 100%" [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Baneadas </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="card-list card-list-user">
+      <div class="card-list__item" *ngFor="let card of bannedList">
+        <img [src]="card.card_images[0].image_url_small" alt="" />
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel style="width: 100%" [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Limitadas </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="card-list card-list-user">
+      <div class="card-list__item" *ngFor="let card of limitedList" cdkDrag>
+        <img [src]="card.card_images[0].image_url_small" alt="" />
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel style="width: 100%" [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Semi-Limitadas </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="card-list card-list-user">
+      <div class="card-list__item" *ngFor="let card of semiLimitedList" cdkDrag>
+        <img [src]="card.card_images[0].image_url_small" alt="" />
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel style="width: 100%" [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Sin límite </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="card-list card-list-user">
+      <div class="card-list__item" *ngFor="let card of unlimitedList">
+        <img [src]="card.card_images[0].image_url_small" alt="" />
+      </div>
+    </div>
+  </mat-expansion-panel>
+</div>

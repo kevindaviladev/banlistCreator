@@ -13,11 +13,23 @@ import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { CardsService } from './services/cards.service';
 import { AngularFireModule } from '@angular/fire/compat';
+import { AppRoutingModule } from './app.routing';
+import { LoginComponent } from './pages/login/login.component';
+import { AdminComponent } from './pages/admin/admin.component';
+import { BanlistComponent } from './pages/banlist/banlist.component';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    AdminComponent,
+    BanlistComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     HttpClientModule,
     MatInputModule,
     FormsModule,
@@ -25,6 +37,8 @@ import { AngularFireModule } from '@angular/fire/compat';
     MatIconModule,
     DragDropModule,
     MatExpansionModule,
+    MatButtonModule,
+    AngularFireAuthModule,
     provideFirebaseApp(() =>
       initializeApp({
         apiKey: 'AIzaSyBH87PQD9-7QoEmihN8KGVBWGTK8W5y8Gs',
