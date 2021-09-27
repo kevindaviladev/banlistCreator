@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -7,14 +10,23 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor(public auth: AngularFireAuth) {}
+  email = new FormControl('');
+  password = new FormControl('');
+  isPasswordShowed = false;
+  // 'admin@nash.com', '123456'
+  constructor(public auth: AngularFireAuth, private router: Router) {}
 
   ngOnInit(): void {}
 
   login() {
     this.auth
-      .signInWithEmailAndPassword('admin@nash.com', '123456')
-      .then(console.log);
+      .signInWithEmailAndPassword(this.email.value, this.password.value)
+      .then((res) => {
+        this.router.navigateByUrl('/admin');
+      })
+      .catch((err) =>
+        swal.fire('Error', 'Usuario o clave incorrectos', 'error')
+      );
   }
 
   logout() {

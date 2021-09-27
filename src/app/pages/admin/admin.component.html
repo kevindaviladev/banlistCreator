@@ -1,7 +1,7 @@
-<div style="display: flex; flex-direction: column; height: 100vh">
-  <div class="container" style="flex: 1" cdkDropListGroup>
+<div style="display: flex; flex-direction: column;">
+  <div class="container" cdkDropListGroup>
     <div class="lists">
-      <mat-expansion-panel style="width: 100%" [expanded]="true">
+      <mat-expansion-panel class="list__panel" [expanded]="true">
         <mat-expansion-panel-header>
           <mat-panel-title> Baneadas </mat-panel-title>
         </mat-expansion-panel-header>
@@ -23,7 +23,7 @@
         </div>
       </mat-expansion-panel>
 
-      <mat-expansion-panel style="width: 100%">
+      <mat-expansion-panel class="list__panel">
         <mat-expansion-panel-header>
           <mat-panel-title> Limitadas </mat-panel-title>
         </mat-expansion-panel-header>
@@ -45,7 +45,7 @@
         </div>
       </mat-expansion-panel>
 
-      <mat-expansion-panel style="width: 100%">
+      <mat-expansion-panel class="list__panel">
         <mat-expansion-panel-header>
           <mat-panel-title> Semi-Limitadas </mat-panel-title>
         </mat-expansion-panel-header>
@@ -67,7 +67,7 @@
         </div>
       </mat-expansion-panel>
 
-      <mat-expansion-panel style="width: 100%">
+      <mat-expansion-panel class="list__panel">
         <mat-expansion-panel-header>
           <mat-panel-title> Sin límite </mat-panel-title>
         </mat-expansion-panel-header>
@@ -134,5 +134,9 @@
     </div>
   </div>
 
-  <div class="footer-content">Designed by Kevin Davila</div>
+  <div class="footer-content">
+    Designed by
+    <img src="assets/kevin-davila.svg" alt="kevin-davila-logo" class="logo" />
+    Kevin Davila
+  </div>
 </div>

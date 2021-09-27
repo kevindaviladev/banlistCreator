@@ -1,24 +1,32 @@
 .container {
   width: 100%;
-  height: 100%;
+  // height: 100%;
   display: grid;
   grid-template-columns: 74% 24%;
   gap: 1em;
   background-color: #1f2626;
+  height: calc(100vh - 50px);
 
   .lists {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
+    // display: flex;
+    // flex-direction: column;
+    // gap: 1em;
     margin: 1em;
     padding: 1em;
     border-radius: 1em;
     overflow: scroll;
+
+    .list__panel{
+      width: 100%;
+
+      &:not(:first-child) {
+        margin-top: 1em;
+    }
+    }
   }
 
   .searcher {
     background-color: white;
-    border: 1px solid blue;
     border-radius: 1em;
     margin: 1em 0;
     padding: 0.2em 1em;
@@ -73,6 +81,24 @@
   background-color: #1d90ce;
   color: white;
   font-weight: 600;
+}
+
+.footer-content{
+  // width: 100%;
+  height: 47px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1d90ce;
+  .logo{
+    height: 48px;
+    width: 45px;
+    margin: 0 .5em;
+    border: 1px solid #1d90ce;
+    border-radius: 50%;
+    background-color: white;
+  }
 }
 
 ::ng-deep {
